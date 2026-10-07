@@ -1,14 +1,22 @@
-# Slope Stability Analysis Control Room
+# AI-Assisted Slope Stability Monitoring
 
-A static, browser-run engineering screening dashboard for the Civil Engineering Department at Ramachandra College of Engineering (RCE), Eluru.
+A no-install, single-page academic prototype for Ch. Jagadeesh, B.Tech Civil Engineering, Ramachandra College of Engineering, Eluru.
 
-## Run
+## Run and Deploy
 
-Open `index.html` in a modern browser. No build step, server, external asset, or dependency installation is required.
+Open `index.html` directly in a modern browser or publish the repository with GitHub Pages. No server, build step, backend, login, external assets, or dependencies are required.
 
-## Calculation model
+## Demonstration Workflow
 
-The displayed calculation follows the requested screening equations:
+1. Enter slope, soil, water, loading, and deformation inputs.
+2. Optionally choose one of five demo scenarios to populate the form.
+3. Click **Run Analysis** to update engineering screening, prototype risk, warnings, charts, contributions, and history.
+4. Toggle **Demo Mode** to show deterministic simulated monitoring/trend samples. The interface labels these as simulated, never live telemetry.
+5. Generate a print-ready analysis report or clear locally saved history.
+
+Analysis history uses browser `localStorage`; if browser storage is unavailable, history is limited to the current page session.
+
+## Engineering Screening
 
 - Normal stress: `gamma * H * cos²(beta)`
 - Water pressure: `ru * normal stress`
@@ -17,14 +25,18 @@ The displayed calculation follows the requested screening equations:
 - Driving shear: `gamma * H * sin(beta) * cos(beta) + surcharge * sin(beta) * cos(beta) + kh * gamma * H * cos²(beta)`
 - Factor of Safety: `resisting shear / driving shear`
 
-The surcharge and seismic terms are explicitly simplified screening components. They do not represent a selected slip-surface or limit-equilibrium analysis. Rainfall and groundwater depth are contextual inputs for visualization and review prompts; they do not directly change FS because the supplied equations use the entered pore-pressure ratio. Reassess that ratio using a site-specific hydrogeologic basis. The displayed STABLE screening label uses FS >= 1.5; this is not a determination of site safety. Risk bands and input-trigger flags are illustrative and are not calibrated design criteria.
+Driving surcharge/seismic components are simplified screening terms, not a selected slip-surface or limit-equilibrium solution. Rainfall and groundwater depth are monitoring/context inputs; only the entered pore-pressure ratio affects the supplied FS equations. Screening FS bands and monitor-state thresholds are configurable and illustrative, not validated site alert or design criteria.
 
-## AI and model evaluation
+## Prototype Risk Engine
 
-No Python notebook, trained models, training dataset, or model evaluation outputs were present in the supplied workspace. The Random Forest and Gradient Boosting prediction values, metrics, feature importance, confusion matrices, and best-model ranking are therefore shown as unavailable rather than fabricated. Connect the trained artifacts and their matching preprocessing/feature pipeline before reporting predictions.
+The **Prototype AI Risk Engine** is a deterministic weighted heuristic, not a trained model or calibrated probability. It normalizes nine indicators to 0–100, then combines them with fixed weights: FS 28%, angle 10%, rainfall 10%, groundwater depth 8%, pore-pressure ratio 12%, surface displacement 12%, displacement rate 8%, crack width 7%, and seismic coefficient 5%. Displayed contribution bars are the weighted score-point contribution from each input and sum to the rounded prototype score.
 
-Four engineering plots are computed deterministically from the current inputs. The Factor of Safety scenario sweep is a parameter sweep, not a probability distribution. Model-dependent plots remain unavailable until genuine model outputs are connected.
+Risk tiers also consider the configured FS screening bands. The risk score, tier, monitor states, warnings, and recommendations are decision-support demonstrations only. Edit prototype FS and monitoring thresholds in the dashboard; invalid threshold ordering is flagged.
+
+## ML and GIS Status
+
+Random Forest, Gradient Boosting, training data, model files, and prediction API are not connected. No ML accuracy, RMSE, MAE, R², predictions, or training samples are claimed. Trained machine-learning integration is a planned next stage. The GIS graphic and initial coordinates are a clearly labeled demo location, not a surveyed slope or live map.
 
 ## Limitations
 
-This is an educational screening prototype. It does not replace investigation, laboratory testing, groundwater assessment, accepted limit-equilibrium methods, numerical analysis, uncertainty assessment, or qualified geotechnical review. Confirm the calculation assumptions and applicability before using results in any engineering context.
+Academic prototype for demonstration only. Results must not substitute for site investigation, laboratory testing, field monitoring, groundwater assessment, accepted limit-equilibrium analysis, uncertainty assessment, or qualified professional engineering design.
